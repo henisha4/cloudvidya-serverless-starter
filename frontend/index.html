@@ -1,46 +1,512 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CloudVidya Starter</title>
-<link rel="stylesheet" href="styles.css" />
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudentShare | Academic Resource Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 <body>
-  <header>
-    <h1 id="appTitle">CloudVidya Starter</h1>
-    <p>Frontend &rarr; API Gateway &rarr; Lambda &rarr; DynamoDB</p>
-  </header>
-  <main>
-    <div class="card">
-      <strong>Submit a new item</strong>
-      <div class="flow">
-        <span>1. Browser</span><span>&rarr;</span><span>2. API Gateway</span><span>&rarr;</span><span>3. Lambda</span><span>&rarr;</span><span>4. DynamoDB</span>
-      </div>
-      <label for="title">Title</label>
-      <input id="title" type="text" placeholder="e.g. Broken classroom projector" />
-      <label for="description">Description</label>
-      <textarea id="description" placeholder="Describe the issue or idea..."></textarea>
-      <label for="category">Category</label>
-      <select id="category">
-        <option>Infrastructure</option>
-        <option>Academic</option>
-        <option>Event</option>
-        <option>Other</option>
-      </select>
-      <label for="participantName">Your name</label>
-      <input id="participantName" type="text" placeholder="e.g. Priya Shah" />
-      <button id="submitBtn">Submit</button>
-      <div id="status"></div>
-    </div>
 
-    <div class="card">
-      <strong>Recent items (live from DynamoDB)</strong>
-      <div id="list" style="margin-top: 10px;">Loading&hellip;</div>
-    </div>
-  </main>
+    <!-- Navigation -->
 
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+    <nav class="navbar">
+
+        <div class="logo">
+            📚 StudentShare
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#resources">Resources</a>
+            <a href="#share">Share</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="hero-content">
+
+            <span class="badge">
+                STUDENT ACADEMIC COMMUNITY
+            </span>
+
+            <h1>
+                Learn.
+                <span>Share.</span>
+                Grow.
+            </h1>
+
+            <p>
+                Discover notes, past papers, study guides
+                and academic resources shared by students.
+            </p>
+
+            <a
+                href="#share"
+                class="hero-button"
+            >
+                Share a Resource
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Dashboard -->
+
+    <section class="dashboard">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📚
+            </div>
+
+            <div>
+                <h3 id="totalResources">
+                    0
+                </h3>
+
+                <p>Total Resources</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎓
+            </div>
+
+            <div>
+                <h3 id="totalCourses">
+                    0
+                </h3>
+
+                <p>Courses</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📄
+            </div>
+
+            <div>
+                <h3 id="totalNotes">
+                    0
+                </h3>
+
+                <p>Notes</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div>
+                <h3 id="totalContributors">
+                    0
+                </h3>
+
+                <p>Contributors</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Share Resource -->
+
+    <section
+        class="section"
+        id="share"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                CONTRIBUTE
+            </span>
+
+            <h2>
+                Share Your Knowledge
+            </h2>
+
+            <p>
+                Upload an academic resource and help
+                another student learn.
+            </p>
+
+        </div>
+
+
+        <form
+            id="resourceForm"
+            class="resource-form"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Resource Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="e.g. Data Structures Unit 3 Notes"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Describe this resource..."
+                    rows="4"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Notes">
+                            Notes
+                        </option>
+
+                        <option value="Past Papers">
+                            Past Papers
+                        </option>
+
+                        <option value="Study Guides">
+                            Study Guides
+                        </option>
+
+                        <option value="Assignments">
+                            Assignments
+                        </option>
+
+                        <option value="Question Banks">
+                            Question Banks
+                        </option>
+
+                        <option value="Lab Manuals">
+                            Lab Manuals
+                        </option>
+
+                        <option value="E-Books">
+                            E-Books
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="course"
+                        placeholder="e.g. DBMS"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Semester
+                    </label>
+
+                    <select id="semester">
+
+                        <option value="">
+                            Select Semester
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                        <option value="7">
+                            Semester 7
+                        </option>
+
+                        <option value="8">
+                            Semester 8
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="uploadedBy"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Academic File
+                </label>
+
+                <input
+                    type="file"
+                    id="file"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
+                >
+
+                <small>
+                    PDF, Word, PowerPoint or text files
+                </small>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-button"
+                id="submitButton"
+            >
+
+                📤 Share Resource
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Resources -->
+
+    <section
+        class="section"
+        id="resources"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                EXPLORE
+            </span>
+
+            <h2>
+                Academic Resources
+            </h2>
+
+            <p>
+                Find resources shared by your student community.
+            </p>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search resources..."
+            >
+
+
+            <select id="categoryFilter">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                <option value="Notes">
+                    Notes
+                </option>
+
+                <option value="Past Papers">
+                    Past Papers
+                </option>
+
+                <option value="Study Guides">
+                    Study Guides
+                </option>
+
+                <option value="Assignments">
+                    Assignments
+                </option>
+
+                <option value="Question Banks">
+                    Question Banks
+                </option>
+
+                <option value="Lab Manuals">
+                    Lab Manuals
+                </option>
+
+                <option value="E-Books">
+                    E-Books
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <select id="courseFilter">
+
+                <option value="">
+                    All Courses
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Resources Grid -->
+
+        <div
+            id="resourceGrid"
+            class="resource-grid"
+        >
+
+            <div class="loading">
+                Loading resources...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-logo">
+            📚 StudentShare
+        </div>
+
+        <p>
+            A student-powered academic resource sharing platform.
+        </p>
+
+        <p class="copyright">
+            © 2026 StudentShare
+        </p>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
 </body>
+
 </html>
